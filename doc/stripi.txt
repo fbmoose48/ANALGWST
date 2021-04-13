@@ -1,0 +1,132 @@
+
+
+
+stripi(1)        U.S. Geological Survey (wrdapp)        stripi(1)
+
+
+NAME
+       stripi - An analytical solution for two-dimensional ground-water
+                solute transport in an infinite-width system with uniform
+                flow and a finite-width solute source
+
+ABSTRACT
+       The program STRIPI computes the analytical solution to the two-
+       dimensional solute-transport equation for an infinite-width system
+       with a finite-width solute source.
+
+METHOD
+       The computer program calculates the concentration for the two-
+       dimensional system based on the equation given in Wexler (1992a, p.
+       36). The concentration can be calculated for different times and
+       spatial locations.
+
+HISTORY
+       Version 1.1 1996/04/03 - Code restructuring and clean up: use of
+          consistent spacing; use of upper and lower case variable names;
+          statement labels renumbered; comment statements altered to be
+          consistent; use of Hollerinth data in FORMAT statements removed;
+          all variables and routines declared; duplicate code placed in new
+          routines; interactive prompting for graphics output devices
+          added.  Bug fixed in contour routine related to contours at the
+          left edge of the plot.
+
+       Version 1.0 1990/04/03 - Initial published version.
+
+DATA REQUIREMENTS
+       The program requires data on advective velocity, dispersion
+       coefficient, spatial information, temporal information, and boundary
+       concentrations.  Optional data may include a first-order solute-
+       decay coefficient.
+
+OUTPUT OPTIONS
+       Output is the calculated concentrations at specified points in time
+       and space. A plotting option exists to view the output as graphs.
+
+SYSTEM REQUIREMENTS
+       pgm_name is written in Fortran 77 with the following extensions:
+       use of include files and reference to compiler-dependent system date
+       and time routines.  The program requires the file glq.pts
+       (provided), which contains normalized roots and weights of the
+       Legendre polynomials.  A script program is provided to facilitate
+       connection of the program with the glq.pts file.  Graphics are coded
+       using Computer Associates' DISSPLA library references.  Generally,
+       the program is easily installed on most computer systems that have
+       access to the DISSPLA graphics library.  Alternatively, graphics can
+       be disabled and data can be easily extracted from the program output
+       and plotted using graphic presentation programs.  The code has been
+       used on UNIX-based computers.
+
+DOCUMENTATION
+       Wexler, E.J., 1992a, Analytical solutions for one-, two-, and three-
+
+
+
+                           04 June 1997                         1
+
+
+
+
+
+stripi(1)        U.S. Geological Survey (wrdapp)        stripi(1)
+
+
+          dimensional solute transport in ground-water systems with uniform
+          flow: U.S. Geological Survey Techniques of Water-Resources
+          Investigations, book 3, chap. B7, 190 p.
+
+       Wexler, E.J., 1992b, Analytical solutions for one-, two-, and three-
+          dimensional solute transport in ground-water systems with uniform
+          flow -- Supplemental Report: Source codes for computer programs
+          and sample data sets: U.S. Geological Survey Open-File Report
+          92-78, 3 p., 1 computer diskette.
+
+TRAINING
+       Some of the programs are introduced in the class Ground-Water
+       Solute-Transport Concepts for Field Investigations (GW2005TC),
+       offered annually at the USGS National Training Center.
+
+CONTACTS
+       Operation:
+          U.S. Geological Survey
+          Office of Ground Water
+          Thomas E. Reilly
+          411 National Center
+          Reston, VA 20192
+
+          tereilly@usgs.gov
+
+       Distribution:
+          U.S. Geological Survey
+          Hydrologic Analysis Software Support Team
+          David Boldt
+          437 National Center
+          Reston, VA 20192
+
+          h2osoft@usgs.gov
+
+       Official versions of U.S. Geological Survey water-resources analysis
+       software are available for electronic retrieval via the World Wide
+       Web (WWW) at:
+
+                  http://water.usgs.gov/software/
+
+       and via anonymous File Transfer Protocol (FTP) from:
+
+                  water.usgs.gov (path: /pub/software).
+
+       The WWW page and anonymous FTP directory from which the ANALGWST
+       software can be retrieved are, respectively:
+
+                  http://water.usgs.gov/software/analgwst.html
+                                --and--
+                  /pub/software/ground_water/analgwst
+
+
+
+
+
+
+
+                           04 June 1997                         2
+
+
