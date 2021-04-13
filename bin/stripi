@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+#  Script to run program STRIPI
+#
+TOPDIR=..
+GLQPTSFILE=$TOPDIR/bin_data/glq.pts
+GFIL=GLQ.PTS
+test='no'
+#                     check that GLQ.PTS file exists
+if [ ! -f $GFIL ] ; then
+      test='yes'
+      ln -s $GLQPTSFILE $GFIL
+   fi
+$TOPDIR/bin/stripi.exe
+if [ $test -eq 'yes' ] ; then rm $GFIL ; fi
