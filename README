@@ -1,0 +1,431 @@
+                                                             JUNE 3, 1997
+
+                                ANALGWST
+                  FINITE - Version: 1.1 1996/04/03
+                  GAUSS - Version: 1.1 1996/04/03
+                  PATCHF - Version: 1.1 1996/04/03
+                  PATCHI - Version: 1.1 1996/04/03
+                  POINT2 - Version: 1.1 1996/04/03
+                  POINT3 - Version: 1.1 1996/04/03
+                  POINT3_MOD - Version: 1.1 1996/04/03
+                  SEMINF - Version: 1.1 1996/04/03
+                  STRIPF - Version: 1.1 1996/04/03
+                  STRIPI - Version: 1.1 1996/04/03
+        Analytical solution for one-, two-, and three-dimensional
+       solute transport in ground-water systems with uniform flow
+
+
+For assistance, enhancement requests, or bug reports contact the Hydrologic
+Analysis Software Support Team via email at h2osoft@usgs.gov.  See the *.txt
+files in the doc directory for descriptions, references, and additional 
+contacts for this software.  Instructions for installation, execution, and 
+testing are provided below.
+
+
+                            TABLE OF CONTENTS
+
+                         A. FILES
+                         B. DESCRIPTION
+                         C. MODIFICATIONS
+                         D. EXTRACTING FILES
+                         E. COMPILING
+                         F. INSTALLING
+                         G. RUNNING THE SOFTWARE
+                         H. TESTING
+
+
+A. FILES
+
+The following distribution packages (containing the software, test data sets,
+and information files) are currently available for UNIX systems:
+
+  analgwst.1.DGUX.tar.gz    - Compiled for Data General AViiON under DG/UX 5.4
+  analgwst.1.Solaris.tar.gz - Compiled for Sun UltraSPARC 2 under Solaris 2.5
+  analgwst.1.source.tar.gz  - Source code
+
+
+B. DESCRIPTION
+
+The program FINITE computes the analytical solution to the one-
+dimensional solute-transport equation for a finite system with a
+first-type or third-type boundary condition at the inflow end.
+
+The program GAUSS computes the analytical solution to the two-
+dimensional solute-transport equation for an infinite-width system
+with a solute source having a gaussian concentration distribution.
+
+The program PATCHF computes the analytical solution to the three-
+dimensional solute-transport equation for a finite-width and finite-
+height system with a finite-width and finite-height solute source.
+
+The program PATCHI computes the analytical solution to the three-
+dimensional solute-transport equation for an infinite-width and
+infinite-height system with a finite-width and finite-height solute
+source.
+
+The program POINT2 computes the analytical solution to the two-
+dimensional solute-transport equation for an infinite system with a
+continuous point source.
+
+The program POINT3 computes the analytical solution to the three-
+dimensional solute-transport equation for an infinite system with a
+continuous point solute source.
+
+The program POINT3_MOD is a modification of the POINT3 program that 
+computes the analytical solution to the three-dimensional solute-transport
+equation for an infinite system with a continuous point solute source.
+
+The program SEMINF computes the analytical solution to the one-
+dimensional solute-transport equation for a semi-infinite system
+with a first-type or third-type boundary condition at the inflow end.
+
+The program STRIPF computes the analytical solution to the two-
+dimensional solute-transport equation for a finite-width system with
+a finite-width solute source.
+
+The program STRIPI computes the analytical solution to the two-
+dimensional solute-transport equation for an infinite-width system
+with a finite-width solute source.
+
+
+C. MODIFICATIONS
+
+The program has been modified from the published code.  The modifications
+involved code restructuring and clean up.  The clean up involved use of
+consistent spacing, use of upper and lower case variable names, statement
+labels are renumbered, comment statements are altered to be consistent,
+use of Hollerinth data in FORMAT statements removed, all variables and
+routines are declared, duplicate code placed in new routines.  Interactive
+prompting for graphics output devices is added.  Bug fixed in contour
+routine related to contours at the left edge of the plot.
+
+
+D. EXTRACTING FILES
+
+The compressed tar file, named analgwst.1.OS.tar.gz, contains all the files
+needed to install and test ANALGWST on a computer with a particular operating
+system, where OS is a string indicating the operating system the distribution
+is intended for.  If a version is not available for your operating system, the
+file analgwst.1.source.tar.gz contains the source code and all other files
+needed to compile, install, and test the software on a UNIX-based computer.
+For either type of distribution, the directory analgwst.1 is created (or
+overwritten) when the files are extracted from the tar file.  If the analgwst.1
+directory already exists, you may want to delete or rename it before
+extracting the files.  The following are the steps to extract the files
+from a distribution tar file.
+
+   1. If the tar file is not already in the directory under which you want
+      the distribution installed, move it there.  For example:
+         mv analgwst.1.____.tar.gz /usr/opt/wrdapp
+
+   2. If you are not in the directory where the tar file is located, go
+      there.  For example:
+         cd /usr/opt/wrdapp
+
+   3. Uncompress the distribution file.  For example:
+         gunzip analgwst.1.____.tar.gz
+
+   4. Extract the distribution files from the tar file.  For example:
+         tar -xpof analgwst.1.___.tar
+
+      This creates the following directory structure (the contents of each
+      directory are shown to the right):
+
+      analgwst.1         ; copy of this README file
+        `-----bin        ; compiled executables
+        `-----bin_data   ; data file required by GAUSS, PATCHI, POINT2, STRIPI
+        `-----doc        ; documentation files 
+        `-----src        ; Makefile and source code
+        `-----test       ; scripts to run verification tests
+        `-----data       ; standard data sets used in verification tests
+
+Notes:
+a) The bin directory is not included in the analgwst.1.source.tar.gz
+   distribution (it is created during compilation).
+b) Source code is included only with the analgwst.1.source.tar.gz
+   distribution.
+c) It is recommended that no user files be kept in the analgwst.1 directory
+   structure.  If you do plan to put files in the analgwst.1 directory
+   structure, do so only by creating subdirectories of analgwst.1.
+
+
+E. COMPILING
+
+If a compiled version of the software is not available for your computer, or
+if you want to build the executables yourself, follow the instructions in this
+section.  If you have retrieved a pre-compiled distribution of the software,
+skip to the Installing section below.
+
+The source code is provided in the analgwst.1.source.tar.gz distribution so
+that users can generate the executables themselves.  No support can be
+provided for users generating their own versions of the software.  In general,
+the requirements are a Fortran compiler, DISSPLA graphics library, and a
+minimal level of knowledge of the compiler and the UNIX operating system.
+As provided, the Makefile and source code are set up for use on Data General
+AViiON workstations running the DG/UX operating system.
+
+To generate new executables, do the following:
+
+   1. Change directory to the source directory:
+         cd analgwst.1/src
+
+   2. Modify the beginning of the file named Makefile to correctly specify 
+      system-dependent variables:
+        
+         GraphLib     Graphics library pathname
+         F77          Fortran compiler name
+         FFLAGS       Fortran compiler flags
+         OS           Operating system name
+    
+   3. Use the make program to initiate compilation of the source code and
+      installation of the software:
+         make [BINDIR=directory_for_links]
+
+      See the Installing instructions below for an explanation of BINDIR.
+
+      The make will:
+         a. create the directories analgwst.1/bin and BINDIR if they do not
+            already exist,
+         b. compile the source code,
+         c. place the executables (seminf, finite, point2.exe, stripf,
+            stripi.exe, gauss.exe, point3, patchf, patchi, point3_mod) in
+            analgwst.1/bin, and
+         d. place a link to the executables in BINDIR if specified.
+
+
+F. INSTALLING
+
+To make the executables (seminf, finite, point2.exe, stripf, stripi.exe, 
+gauss.exe, point3, patchf, patchi, point3_mod) easy to use, it should be
+installed in a directory included in the user's search path.  The Makefile
+(input instructions to the UNIX make program--located in analgwst.1/src)
+contains instructions to optionally place a link in a specified directory to
+the executables contained in analgwst.1/bin.  Use the following two commands
+to do this:
+
+       cd analgwst.1/src
+       make install [BINDIR=directory_for_links]
+
+If BINDIR is specified, a link to each executable is placed in the specified
+directory.  For example, if your search path consists of:
+       /usr/bin:/usr/opt/bin:/usr/local/bin
+use the command:
+       make install BINDIR=/usr/local/bin
+to make the executables accessible from any directory without requiring the full
+pathname of the software's location.
+
+Notes:
+a) Brackets "[xxx]" are used to indicate optional arguments to commands.
+b) To create and delete a link to the ANALGWST executable files, the installer
+   must have sufficient rights in the directory that BINDIR is set to.
+
+
+G. RUNNING THE SOFTWARE
+
+ANALGWST prompts for the input and output file names.  If plotting is selected,
+the programs prompt for the graphics device (X11 display, PostScript, Meta file,
+TAB 132/15 graphics display, or Tektronix 4114 graphics display).  If PostScript
+is selected, the program prompts for the file name for this output.  Note that
+the DISSPLA graphics requires the specified file not exist prior to execution.
+The last prompt requests the color to use to generate the plots.  Enter values
+such as BLACK, YELLOW, RED, GREEN, or BLUE.  Programs GAUSS, PATCHI, POINT2,
+and STRIPI require the file glq.pts which contains normalized roots and weights
+of the Legendre polynominals.  This file is included in the bin_data directory
+and script programs are provided to facilitate connection of each program
+with the glq.pts file.
+
+
+H. TESTING
+
+Test data sets are provided to verify that the program is correctly installed
+and running on the system.  The tests may also be looked at as examples of how
+to use the program.  The directory "analgwst.1/test" contains the scripts to
+run the tests.  The directory "analgwst.1/data" contains the input data and
+expected results for each test.  Tests are usually run in the directory
+analgwst.1/test, but they can be run in any user directory if the installation
+procedure was completed (make install performed).  Run the tests using any of
+the commands in the table below.  To test the installation, change to the
+analgwst.1/test directory and type the command:
+      ./test.sh [m [n]]
+
+If running from another directory, specify the full path to the script; for
+example:
+      /usr/opt/wrdapp/ncalc_2.6/test/test.sh [m [n]]
+
+where:
+     m = the number of the first test to perform, default=1
+     n = the number of the last test to perform, default=12
+
+For example:
+
+command                         what happens
+------------------      ------------------------------------
+./test.sh               runs all of the tests
+./test.sh n             runs test 'n' through the last test
+./test.sh n m           runs test 'n' through 'm'
+
+After the tests are completed, the results are compared to the expected
+results.  If all goes well, the only differences will be due to different
+processing times or pathnames.  To clean up after the tests, type the
+command:
+      ./clean.sh
+
+NOTE: the standard data sets were created on a Data General AViiON workstation.
+You may notice slight numeric differences in the results on other computers.
+These are generally due to different round-off algorithms and the different
+architecture of the central processing unit chip.
+
+The tests are described in the table below.  Test is the test number, program
+is the program used to run the test, and the usage column indicates how a file
+is used, with i for input, o for output, and i/o for both input and output.
+
+test  program  description of test and files      file name & usage
+----  -------  ---------------------------------  -----------------
+  1   finite   Sample Problem 1a -- Solute transport in a finite-length
+               soil column with a first-type boundary condition at x=0
+               Model Parameters:  L=12 in, V=0.6 in/h, D=0.6 in**2/h
+                                  K1=0.0 per h, C0=1.0 mg/L
+
+               program data                       sample1a.dat    i
+               program results                    sample1a.prt    o
+               screen output log file             sample1a.log    o
+
+               Sample Problem 1b -- Solute transport in a finite-length
+               soil column with a first-type boundary condition at x=0
+               Model Parameters:  L=12 in, V=0.072 in/h, D=0.072 in**2/h
+                                  K1=0.0 per h, C0=1.0 mg/L
+               Solute is subject to linear adsorption
+
+
+               program data                       sample1b.dat    i
+               program results                    sample1b.prt    o
+               screen output log file             sample1b.log    o
+
+  2   finite   Sample Problem 2 -- Solute transport in a finite-length
+               soil column with a third-type boundary condition at x=0
+               Model Parameters:  L=12 in, V=0.6 in/h, D=0.6 in**2/h
+                                  K1=0.0 per h, C0=1.0 mg/L
+
+               program data                       sample2.dat     i
+               program results                    sample2.prt     o
+               screen output log file             sample2.log     o
+
+
+  3   seminf   Sample Problem 3a -- Solute transport in a semi-infinite
+               soil column with a first-type boundary condition at x=0
+               Model Parameters:  V=0.6 in/h, D=0.6 in**2/h
+                                  K1=0.0 per h, C0=1.0 mg/L
+
+               program data                       sample3a.dat    i
+               program results                    sample3a.prt    o
+               screen output log file             sample3a.log    o
+
+               Sample Problem 3b -- Solute transport in a semi-infinite
+               soil column with a first-type boundary condition at x=0
+               Model Parameters:  V=0.072 in/h, D=0.072 in**2/h
+                                  K1=0.0038 per h, C0=1.0 mg/L
+               Solute is subject to first-order decay and linear adsorption
+
+               program data                       sample3b.dat    i
+               program results                    sample3b.prt    o
+               screen output log file             sample3b.log    o
+
+  4   seminf   Sample Problem 4 -- Solute transport in a semi-infinite
+               soil column with a third-type boundary condition at x=0
+               Model Parameters:  V=0.6 in/h, D=0.6 in**2/h
+                                  K1=0.0 per h, C0=1.0 mg/L
+
+               program data                       sample4.dat     i
+               program results                    sample4.prt     o
+               screen output log file             sample4.log     o
+
+  5   point2   Sample Problem 5 -- Solute transport in an aquifer of
+               infinite areal extent with a continuous point source
+               Model Data:  V=2.0 ft/d, DX=60.0 ft**2/d, DY=12.0 ft**2/d
+                            QM=12.5 ft**2/d, C0=1000.0 mg/L, N=0.25
+
+               program data                       sample5.dat     i
+               program results                    sample5.prt     o
+               screen output log file             sample5.log     o
+
+  6   stripf   Sample Problem 6 -- Solute transport in a semi-infinite
+               aquifer of finite width with a continuous 'strip' source
+               Model Data:  V=1.0 ft/d, DX=200.0 ft**2/d, DY=60.0 ft**2/d
+                         W=3000 ft, Y1=400 ft, Y2=2000 ft, C0=1000.0 mg/L
+
+               program data                       sample6.dat     i
+               program results                    sample6.prt     o
+               screen output log file             sample6.log     o
+
+  7   stripi   Sample Problem 6 -- Solute transport in a semi-infinite
+               aquifer of finite width with a continuous 'strip' source
+               Model Data:  V=1.0 ft/d, DX=200.0 ft**2/d, DY=60.0 ft**2/d
+                         W=3000 ft, Y1=400 ft, Y2=2000 ft, C0=1000.0 mg/L
+
+               program data                       sample7.dat     i
+               program results                    sample7.prt     o
+               screen output log file             sample7.log     o
+
+  8   gauss    Sample Problem 8a -- Solute transport in a semi-infinite
+               aquifer of infinite width with a continuous gaussian source
+               Model Data:  V=4.0 ft/d, DX=150.0 ft**2/d, DY=30.0 ft**2/d
+                            WS=130 ft, YC=450 ft, C0=1000.0 mg/L
+
+               program data                       sample8a.dat    i
+               program results                    sample8a.prt    o
+               screen output log file             sample8a.log    o
+
+               Sample Problem 8b -- Solute transport in a semi-infinite
+               aquifer of infinite width with a continuous gaussian source
+               Model Data:  V=4.0 ft/d, DX=150.0 ft**2/d, DY=30.0 ft**2/d
+                            WS=65 ft, YC=450 ft, C0=1000.0 mg/L
+
+               program data                       sample8b.dat    i
+               program results                    sample8b.prt    o
+               screen output log file             sample8b.log    o
+
+  9   point3   Sample Problem 9 -- Solute transport in an infinite aquifer
+               with multiple point sources of finite duration
+               Model Data:  V=0.1 ft/d, DX=0.06 ft**2/d, DY=0.003 ft**2/d
+               DZ=0.0006 ft**2/d, QM=1.0 ft**3/d, C0=1000.0 mg/L, n=0.25
+
+               program data                       sample9a.dat    i
+               program results                    sample9a.prt    o
+               screen output log file             sample9a.log    o
+
+ 10   patchf   Sample Problem 10 -- Solute transport in a semi-infinite
+               aquifer of finite width and height with a 'patch' source
+               Model Data:  Y1=400 ft, Y2=2000 ft, Z1=50 ft, Z2=100 ft
+               V=1 ft/d, DX=200, DY=60, DZ=10 ft**2/d, W=3000 ft, H=100 ft
+
+               program data                       sample10.dat    i
+               program results                    sample10.prt    o
+               screen output log file             sample10.log    o
+
+ 11   patchi   Sample Problem 11 -- Solute transport in a semi-infinite
+               aquifer of infinite width and height with a 'patch' source
+               Model Data:  Y1=900 ft, Y2=2100 ft, Z1=1350 ft, Z2=1650 ft
+               V=1 ft/d, DX=100, DY=20, DZ=20 ft**2/d, DK=6.78E-05 per day
+               C0=100.0 mg/L
+
+               program data                       sample11.dat    i
+               program results                    sample11.prt    o
+               screen output log file             sample11.log    o
+
+ 12 point3_mod Sample Problem 9 -- Solute transport in an infinite aquifer
+               with multiple point sources of finite duration
+               Model Data:  V=0.1 ft/d, DX=0.06 ft**2/d, DY=0.003 ft**2/d
+               DZ=0.0006 ft**2/d, QM=1.0 ft**3/d, C0=1000.0 mg/L, n=0.25
+               Note that this program is the point3 program modified to
+               reproduce result as described in Wexler (1992a) page 49.
+
+               program data                       sample9.dat     i
+               program results                    sample9.prt     o
+               screen output log file             sample9.log     o
+
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+                             Good Luck!
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
