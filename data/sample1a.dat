@@ -1,0 +1,13 @@
+Sample Problem 1a -- Solute transport in a finite-length
+soil column with a first-type boundary condition at x=0
+Model Parameters:  L=12 in, V=0.6 in/h, D=0.6 in**2/h
+                   K1=0.0 per h, C0=1.0 mg/L
+====
+   1  25  05  50   1
+MG/L      IN/H      IN**2/H   PER HOUR  INCHES    HOURS
+       1.0       0.6       0.6       0.0      12.0       1.2
+       0.0       0.5       1.0       1.5       2.0       2.5       3.0       3.5
+       4.0       4.5       5.0       5.5       6.0       6.5       7.0       7.5
+       8.0       8.5       9.0       9.5      10.0      10.5      11.0      11.5
+      12.0
+       2.5       5.0      10.0      15.0      20.0
